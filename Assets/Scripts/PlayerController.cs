@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour {
 		if (other.gameObject.CompareTag ("PickUp")) {
 			other.gameObject.SetActive (false);
 		} else if (other.gameObject.CompareTag ("Bounce")) {
-			rb.velocity = Vector3.up * 50;
+			rb.velocity = Vector3.up * 20;
 		}
     }
 }
