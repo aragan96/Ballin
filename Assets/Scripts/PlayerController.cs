@@ -63,9 +63,10 @@ public class PlayerController : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("PickUp"))
-        {
-            other.gameObject.SetActive(false);
-        }
+		if (other.gameObject.CompareTag ("PickUp")) {
+			other.gameObject.SetActive (false);
+		} else if (other.gameObject.CompareTag ("Bounce")) {
+			rb.velocity = Vector3.up * 50;
+		}
     }
 }
