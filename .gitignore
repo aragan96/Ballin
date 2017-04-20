@@ -34,3 +34,7 @@ ehthumbs.db
 Thumbs.db
 
 *.dll
+
+*.dwlt
+
+*.stamp
