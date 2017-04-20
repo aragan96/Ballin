@@ -18,10 +18,26 @@ public class Enemy : MonoBehaviour {
 
     void Update()
     {
+        if (player != null) { 
         var direction = Vector3.zero;
-        Debug.Log(player.transform.position);
         direction = player.transform.position - transform.position;
         direction.Normalize();
         rigbod.velocity = direction * speed;
+    }
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            if((transform.localScale.x * transform.localScale.y * transform.localScale.z) > (player.transform.localScale.x * player.transform.localScale.y * player.transform.localScale.z))
+            {
+                player.gameObject.SetActive(false);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }
