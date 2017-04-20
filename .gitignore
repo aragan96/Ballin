@@ -6,6 +6,7 @@ Obj/
 UnityGenerated/
 Library/
 Assets/AssetStoreTools*
+.vs/.*
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
@@ -33,9 +34,8 @@ Icon?
 ehthumbs.db
 Thumbs.db
 *.zip
-
 *.dll
-
 *.dwlt
-
 *.stamp
+
+
