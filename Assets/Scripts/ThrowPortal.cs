@@ -18,10 +18,10 @@ public class ThrowPortal : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKey(KeyCode.Alpha3)){
+        if (Input.GetKeyDown(KeyCode.Alpha3)){
             throwPortal(leftPortal);
         }
-        if (Input.GetKey(KeyCode.Alpha4))
+        if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             throwPortal(rightPortal);
         }
