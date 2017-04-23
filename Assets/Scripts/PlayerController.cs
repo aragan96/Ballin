@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
+    public static PlayerController instance;
+
     public float speed;
     public Vector2 movementInput;
     public bool growInput;
@@ -17,9 +19,22 @@ public class PlayerController : MonoBehaviour {
     public Transform cam;
     public CameraController cc;
 
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        } else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+
+        //DontDestroyOnLoad(gameObject);
+    }
+
     void Start()
     {   
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponentInChildren<Rigidbody>();
         cc = FindObjectOfType<CameraController>();
     }
 
