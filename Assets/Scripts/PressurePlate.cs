@@ -5,6 +5,7 @@ using UnityEngine;
 public class PressurePlate : MonoBehaviour {
 
 	public SlidingDoor doorToOpen;
+	public float weightThreshold;
 
 	// Use this for initialization
 	void Start () {
@@ -19,9 +20,11 @@ public class PressurePlate : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other){
 		if (other.tag == "Player") {
-			doorToOpen.OpenDoor ();
-			gameObject.GetComponent<Renderer> ().material.color = Color.red;
-			gameObject.GetComponent<BoxCollider> ().enabled = false;
+			if (other.GetComponent<PlayerController> ().size >= weightThreshold) {
+				doorToOpen.OpenDoor ();
+				gameObject.GetComponent<Renderer> ().material.color = Color.red;
+				gameObject.GetComponent<BoxCollider> ().enabled = false;
+			}
 		}
 		Debug.Log (other.tag);
 	}
