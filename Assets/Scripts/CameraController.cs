@@ -27,11 +27,14 @@ public class CameraController : MonoBehaviour {
     private float angleX;
     private float angleY;
 
+    public int upVector;
+
     void Start()
     {
         distance = maxDistance;
         angleX = -45;
         angleY = 0;
+        upVector = 1;
     }
 
     void Update()
@@ -60,7 +63,8 @@ public class CameraController : MonoBehaviour {
         {
             // Place the camera in front of the obstacle but also outside of the player
             distance = Mathf.Clamp(hit.distance, minDistance * scale, maxDistance * scale);
-        } else
+        }
+        else
         {
             // Reset the camera to its normal distance
             distance = maxDistance * scale;
@@ -69,7 +73,6 @@ public class CameraController : MonoBehaviour {
         offset *= distance;
 
         transform.position = player.position + offset;
-        transform.rotation = Quaternion.LookRotation(player.position - transform.position, new Vector3(0, 1, 0));
+        transform.rotation = Quaternion.LookRotation(player.position - transform.position, new Vector3(0, upVector, 0));
     }
-
 }

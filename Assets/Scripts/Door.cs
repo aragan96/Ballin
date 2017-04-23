@@ -5,20 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class Door : MonoBehaviour {
 
-    public bool locked;
+    public bool unlocked;
     public string levelName;
     public GameObject portal;
+    public int stage;
 
     void Start()
     {
-        locked = false;
+        unlocked = GameManager.instance.stageUnlocked[stage];
+        portal.SetActive(unlocked);
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if(!locked && other.CompareTag("Player"))
+        if(unlocked && other.CompareTag("Player"))
         {
             SceneManager.LoadScene(levelName);
+            GameManager.instance.currentStage = stage;
         }   
+    }
+
+    void Unlock()
+    {
+        unlocked = true;
+        portal.SetActive(true);
     }
 }
