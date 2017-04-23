@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public float speed;
+
     public Vector2 movementInput;
     public bool growInput;
     public bool shrinkInput;
@@ -61,12 +62,14 @@ public class PlayerController : MonoBehaviour {
         transform.localScale = new Vector3(size, size, size);
     }
 
+	public void Bounce(float power){
+		rb.velocity = Vector3.up * power;
+	}
+
     void OnTriggerEnter(Collider other)
     {
 		if (other.gameObject.CompareTag ("PickUp")) {
 			other.gameObject.SetActive (false);
-		} else if (other.gameObject.CompareTag ("Bounce")) {
-			rb.velocity = Vector3.up * 20;
 		}
     }
 }
