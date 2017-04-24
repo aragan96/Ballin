@@ -35,10 +35,7 @@ public class GameManager : MonoBehaviour {
 
         stageUnlocked = new bool[numStages + 1];
 
-        stageUnlocked[0] = true;
-        stageUnlocked[1] = true;
-
-        for (int i = 2; i < numStages; i++)
+        for (int i = 0; i < numStages; i++)
             stageUnlocked[i] = true;
     }
 
