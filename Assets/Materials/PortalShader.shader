@@ -80,12 +80,10 @@
 				// sample the texture, this means get the pixel on the texture according to its uv coordinates
 				fixed4 col = tex2D(_MainTex, vInput.uv);
 				// apply main color
-				//col *= (_Color);
-				vertexOutput vOutput;
-				vOutput.worldPosition = mul(unity_ObjectToWorld, vInput.position);
-				col.r = 1 - sin(_Time[1] * vOutput.worldPosition.y/22.5);
-				col.g = 1 - cos(_Time[1] * vOutput.worldPosition.x / 22.5);
-				col.b = 1 - sin(_Time[1] * vOutput.worldPosition.y/22.5);
+				col *= (_Color);
+				col.r = 1;
+				col.g = 1 - cos(3 * _Time[1] * vOutput.worldPosition.y);
+				col.b = 1;
 				col *= calculateLighting(vInput);
 				return col;
 			}
