@@ -26,6 +26,5 @@ public class PressurePlate : MonoBehaviour {
 				gameObject.GetComponent<BoxCollider> ().enabled = false;
 			}
 		}
-		Debug.Log (other.tag);
 	}
 }

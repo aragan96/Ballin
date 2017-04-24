@@ -91,8 +91,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void GoToCheckpoint(){
-		body.transform.position = latestCheckpoint;
-		Debug.Log ("yesa");
+		body.SetActive (false);
+		StartCoroutine (RespawnAtCheckpoint());
 	}
 
     void OnTriggerEnter(Collider other)
@@ -101,4 +101,12 @@ public class PlayerController : MonoBehaviour {
 			other.gameObject.SetActive (false);
 		}
     }
+
+	IEnumerator RespawnAtCheckpoint(){
+		yield return new WaitForSeconds (2f);
+		body.SetActive (true);
+		body.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+
+		body.transform.position = latestCheckpoint;
+	}
 }
