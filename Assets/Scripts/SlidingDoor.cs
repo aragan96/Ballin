@@ -10,6 +10,7 @@ public class SlidingDoor : MonoBehaviour {
 
 	// trigger to control opening
 	public bool doorOpen;
+
 	// where the door should end up at end of animation
 	Vector3 targetPos;
 	Vector3 startPos;

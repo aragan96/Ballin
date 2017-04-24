@@ -82,7 +82,7 @@
 				// apply main color
 				col *= (_Color);
 				col.r = 1;
-				col.g = vInput.worldPosition.y * (1 - cos(3 * _Time[1]));
+				col.g = vInput.worldPosition.y + cos(2 * _Time[1]);
 				col.b = 1;
 				col *= calculateLighting(vInput);
 				return col;
