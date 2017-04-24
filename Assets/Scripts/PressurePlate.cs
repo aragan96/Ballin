@@ -20,7 +20,7 @@ public class PressurePlate : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other){
 		if (other.tag == "Player") {
-			if (other.GetComponent<PlayerController> ().size >= weightThreshold) {
+			if (other.GetComponentInParent<PlayerController> ().size >= weightThreshold) {
 				doorToOpen.OpenDoor ();
 				gameObject.GetComponent<Renderer> ().material.color = Color.red;
 				gameObject.GetComponent<BoxCollider> ().enabled = false;

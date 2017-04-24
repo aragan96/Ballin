@@ -18,7 +18,7 @@ public class BouncePlate : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other){
 		if (other.tag == "Player") {
-			other.GetComponent<PlayerController> ().Bounce (bouncePower);
+			other.GetComponentInParent<PlayerController> ().Bounce (bouncePower);
 		}
 	}
 }
