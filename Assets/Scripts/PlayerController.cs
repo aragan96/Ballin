@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour {
     public float minSize;
     public float maxSize;
 
+    public GameObject body;
     private Rigidbody rb;
     public Transform cam;
     public CameraController cc;
@@ -74,7 +75,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         cc.scale = size;
-        transform.localScale = new Vector3(size, size, size);
+        body.transform.localScale = new Vector3(size, size, size);
     }
 
 	public void Bounce(float power){
