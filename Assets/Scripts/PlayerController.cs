@@ -107,6 +107,7 @@ public class PlayerController : MonoBehaviour {
 	IEnumerator RespawnAtCheckpoint(){
 		yield return new WaitForSeconds (2f);
 		body.SetActive (true);
+		size = 1;
 		body.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 
 		body.transform.position = latestCheckpoint;
