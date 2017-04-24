@@ -27,8 +27,8 @@ public class InputModule : MonoBehaviour
 
 //        rotatingCameraController.camRotate = Input.GetKey("space");
 
-        playerController.growInput = Input.GetKey(KeyCode.Alpha1);
-        playerController.shrinkInput = Input.GetKey(KeyCode.Alpha2);
+		playerController.growInput = Input.GetMouseButton(1);
+		playerController.shrinkInput = Input.GetMouseButton(0);
     }
 
     void FixedUpdate()
