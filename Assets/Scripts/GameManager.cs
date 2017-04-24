@@ -80,6 +80,7 @@ public class GameManager : MonoBehaviour {
 
 	public void MainMenu(){
 		SceneManager.LoadScene ("Main Menu");
+		Unpause ();
 	}
 
 	public void Quit()
