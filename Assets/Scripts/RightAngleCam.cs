@@ -12,59 +12,52 @@ public class RightAngleCam : MonoBehaviour
 
     public bool camRotate;
 
+    public float orbitDistance = 10f;
+    public float orbitDegreesPerSec = -180.0f;
+    Vector3 offset;
+
     public RaycastHit obstacleHit;
     public LayerMask playerMask;
-
-    float distance;
-    public float scale;
-
-    public float minDistance = 1.0f;
-    public float maxDistance = 5.0f;
-
-    public float minVerticalAngle = -80.0f;
-    public float maxVerticalAngle = 80.0f;
-
-    public float verticalSpeed = 150.0f;
-    public float horizontalSpeed = 300.0f;
-
-    public float speed = 5f;
-
-    private float angleX;
-    private float angleY;
 
     public int upVector;
 
     void Start()
     {
-        distance = maxDistance;
-        angleX = -45;
-        angleY = 0;
+        transform.position = player.position + (transform.position - player.position).normalized * orbitDistance;
+        offset = transform.position - player.transform.position;
         upVector = 1;
     }
 
     void Update()
     {
-        ApplyCameraInput();
+        if (camRotate)
+        {
+            transform.position = player.position + (transform.position - player.position).normalized * orbitDistance;
+            
+            transform.RotateAround(player.position, Vector3.up, orbitDegreesPerSec * Time.deltaTime);
+            
+            // transform.LookAt(player.transform);
+            transform.rotation = Quaternion.LookRotation(player.position - transform.position, new Vector3(0, upVector, 0));
+            offset = transform.position - player.transform.position;
+            offset.y = offset.y * upVector;
+        }
+        else
+        {
+            transform.position = new Vector3(player.transform.position.x + offset.x,player.transform.position.y + offset.y*upVector, player.transform.position.z + offset.z);
+            //transform.LookAt(player.transform);
+            transform.rotation = Quaternion.LookRotation(player.position - transform.position, new Vector3(0, upVector, 0));
+        }
     }
 
     void ApplyCameraInput()
     {
+
+        //STILL NEED TO DO THIS
+
+        /*
         if (camRotate)
         {
-            angleX += camInput.x * Time.deltaTime * verticalSpeed;
-
-            //ANGLE Y IS WHAT AFFECTS THE ROTATION AROUND THE BALL???
-            angleY += 1 * Time.deltaTime * verticalSpeed;
-
-            angleX = Mathf.Clamp(angleX, minVerticalAngle, maxVerticalAngle);
-            angleY %= 360;
-
-            //Quaternion xRotation = Quaternion.AngleAxis(angleX, new Vector3(1, 0, 0));
-            Quaternion yRotation = Quaternion.AngleAxis(angleY, new Vector3(0, 1, 0));
-            Vector3 offset = new Vector3(0, 0, 1);
-            //offset = xRotation * offset;
-            offset = yRotation * offset;
-
+            
             RaycastHit hit;
 
             // If there is an object between the player and the camera
@@ -78,14 +71,10 @@ public class RightAngleCam : MonoBehaviour
                 // Reset the camera to its normal distance
                 distance = maxDistance * scale;
             }
-
-            offset *= distance;
-
-            transform.position = player.position + offset;
-            transform.rotation = Quaternion.LookRotation(player.position - transform.position, new Vector3(0, upVector, 0));
-        }
+        }*/
     }
 }
+
 
 
 

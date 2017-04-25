@@ -32,7 +32,7 @@ public class CameraController : MonoBehaviour {
     void Start()
     {
         distance = maxDistance;
-        angleX = -45;
+        angleX = -90;
         angleY = 0;
         upVector = 1;
     }
