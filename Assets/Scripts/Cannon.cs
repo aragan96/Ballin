@@ -23,11 +23,13 @@ public class Cannon : MonoBehaviour {
         {
             GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
             Vector3 fireDirection = camera.transform.forward;
-            player.GetComponent<Rigidbody>().isKinematic = false;
-            player.GetComponent<Rigidbody>().AddForce(fireDirection * powerBar.value * 2000);
-            player.GetComponent<Rigidbody>().useGravity = true;
+            player.transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = false;
+            player.transform.GetChild(0).GetComponent<Rigidbody>().AddForce(fireDirection * powerBar.value * 2000);
+            player.transform.GetChild(0).GetComponent<Rigidbody>().useGravity = true;
             playerOnCannon = false;
             sliderObject.GetComponent<CanvasGroup>().alpha = 0f;
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>().enabled = false;
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<RightAngleCam>().enabled = true;
         }
     }
 
@@ -41,11 +43,11 @@ public class Cannon : MonoBehaviour {
             other.GetComponent<Rigidbody>().useGravity = false;
             other.GetComponent<Rigidbody>().isKinematic = true;
             other.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            //Stop rotation too
-
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<RightAngleCam>().enabled = false;
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>().enabled = true;
+            GameObject.FindGameObjectWithTag("MainCamera").transform.position = transform.GetChild(1).transform.position;
             sliderObject.GetComponent<CanvasGroup>().alpha = 1f;
-
-        // disable player controls
+            
         // add an exit from cannon button gui
         }
     }

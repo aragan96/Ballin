@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
     public static PlayerController instance;
 
     public float speed;
+	Vector3 latestCheckpoint;
 
     public Vector2 movementInput;
     public bool growInput;
@@ -19,6 +20,8 @@ public class PlayerController : MonoBehaviour {
     public GameObject body;
     private Rigidbody rb;
     public Transform cam;
+
+    [System.NonSerialized]
     public CameraController cc;
 
     void Awake()
@@ -38,6 +41,7 @@ public class PlayerController : MonoBehaviour {
     {   
         rb = GetComponentInChildren<Rigidbody>();
         cc = FindObjectOfType<CameraController>();
+		latestCheckpoint = body.transform.position;
     }
 
     void Update()
@@ -78,8 +82,19 @@ public class PlayerController : MonoBehaviour {
         body.transform.localScale = new Vector3(size, size, size);
     }
 
+	// Used for launching platforms
 	public void Bounce(float power){
 		rb.velocity = Vector3.up * power;
+	}
+
+	// Used for saving checkpoints
+	public void SaveCheckpoint(Vector3 pos){
+		latestCheckpoint = pos;
+	}
+
+	public void GoToCheckpoint(){
+		body.SetActive (false);
+		StartCoroutine (RespawnAtCheckpoint());
 	}
 
     void OnTriggerEnter(Collider other)
@@ -88,4 +103,13 @@ public class PlayerController : MonoBehaviour {
 			other.gameObject.SetActive (false);
 		}
     }
+
+	IEnumerator RespawnAtCheckpoint(){
+		yield return new WaitForSeconds (2f);
+		body.SetActive (true);
+		size = 1;
+		body.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+
+		body.transform.position = latestCheckpoint;
+	}
 }

@@ -2,15 +2,79 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RightAngleCam : MonoBehaviour {
+public class RightAngleCam : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public Transform player;
+
+    [System.NonSerialized]
+    public Vector2 camInput;
+
+    public bool camRotate;
+
+    public float orbitDistance = 10f;
+    public float orbitDegreesPerSec = -180.0f;
+    Vector3 offset;
+
+    public RaycastHit obstacleHit;
+    public LayerMask playerMask;
+
+    public int upVector;
+
+    void Start()
+    {
+        transform.position = player.position + (transform.position - player.position).normalized * orbitDistance;
+        offset = transform.position - player.transform.position;
+        upVector = 1;
+    }
+
+    void Update()
+    {
+        if (camRotate)
+        {
+            transform.position = player.position + (transform.position - player.position).normalized * orbitDistance;
+            
+            transform.RotateAround(player.position, Vector3.up, orbitDegreesPerSec * Time.deltaTime);
+            
+            // transform.LookAt(player.transform);
+            transform.rotation = Quaternion.LookRotation(player.position - transform.position, new Vector3(0, upVector, 0));
+            offset = transform.position - player.transform.position;
+            offset.y = offset.y * upVector;
+        }
+        else
+        {
+            transform.position = new Vector3(player.transform.position.x + offset.x,player.transform.position.y + offset.y*upVector, player.transform.position.z + offset.z);
+            //transform.LookAt(player.transform);
+            transform.rotation = Quaternion.LookRotation(player.position - transform.position, new Vector3(0, upVector, 0));
+        }
+    }
+
+    void ApplyCameraInput()
+    {
+
+        //STILL NEED TO DO THIS
+
+        /*
+        if (camRotate)
+        {
+            
+            RaycastHit hit;
+
+            // If there is an object between the player and the camera
+            if (Physics.Raycast(player.position, transform.position, out hit, maxDistance * scale, playerMask))
+            {
+                // Place the camera in front of the obstacle but also outside of the player
+                distance = Mathf.Clamp(hit.distance, minDistance * scale, maxDistance * scale);
+            }
+            else
+            {
+                // Reset the camera to its normal distance
+                distance = maxDistance * scale;
+            }
+        }*/
+    }
 }
+
+
+
+
