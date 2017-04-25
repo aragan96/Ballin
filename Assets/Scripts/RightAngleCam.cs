@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RightAngleCam : MonoBehaviour
 {
-
     public Transform player;
 
     [System.NonSerialized]
@@ -14,12 +13,8 @@ public class RightAngleCam : MonoBehaviour
 
     public float orbitDistance = 10f;
     public float orbitDegreesPerSec = -180.0f;
-    public float minDistance = 3f;
     public float maxDistance = 10f;
     Vector3 offset;
-
-    public RaycastHit obstacleHit;
-    public LayerMask playerMask;
 
     public int upVector;
 
@@ -61,37 +56,10 @@ public class RightAngleCam : MonoBehaviour
         }
         else
         {
-
-            //MULTIPLY THIS BY ORBIT DISTANCE SOMEHOW THEN CHANGE ORBITDISTANCE WITH RAYCAST IF NECESSARY
+            
             transform.position = new Vector3(player.transform.position.x + offset.x,player.transform.position.y + offset.y*upVector, player.transform.position.z + offset.z);
-            // transform.LookAt(player.transform);
             transform.rotation = Quaternion.LookRotation(player.position - transform.position, new Vector3(0, upVector, 0));
         }
-    }
-
-    void ApplyCameraInput()
-    {
-
-        //STILL NEED TO DO THIS
-
-        /*
-        if (camRotate)
-        {
-            
-            RaycastHit hit;
-
-            // If there is an object between the player and the camera
-            if (Physics.Raycast(player.position, transform.position, out hit, maxDistance * scale, playerMask))
-            {
-                // Place the camera in front of the obstacle but also outside of the player
-                distance = Mathf.Clamp(hit.distance, minDistance * scale, maxDistance * scale);
-            }
-            else
-            {
-                // Reset the camera to its normal distance
-                distance = maxDistance * scale;
-            }
-        }*/
     }
 }
 
