@@ -32,19 +32,20 @@ public class RightAngleCam : MonoBehaviour
     {
         if (camRotate)
         {
-            transform.position = player.position + (transform.position - player.position).normalized * orbitDistance;
-            
+            Vector3 orbitVector = player.position + (transform.position - player.position).normalized * orbitDistance;
+            transform.position = new Vector3(orbitVector.x, orbitVector.y * upVector, orbitVector.z);
             transform.RotateAround(player.position, Vector3.up, orbitDegreesPerSec * Time.deltaTime);
-            
-            // transform.LookAt(player.transform);
+            //transform.LookAt(player.transform);
             transform.rotation = Quaternion.LookRotation(player.position - transform.position, new Vector3(0, upVector, 0));
             offset = transform.position - player.transform.position;
             offset.y = offset.y * upVector;
         }
         else
         {
+
+            //MULTIPLY THIS BY ORBIT DISTANCE SOMEHOW THEN CHANGE ORBITDISTANCE WITH RAYCAST IF NECESSARY
             transform.position = new Vector3(player.transform.position.x + offset.x,player.transform.position.y + offset.y*upVector, player.transform.position.z + offset.z);
-            //transform.LookAt(player.transform);
+            // transform.LookAt(player.transform);
             transform.rotation = Quaternion.LookRotation(player.position - transform.position, new Vector3(0, upVector, 0));
         }
     }

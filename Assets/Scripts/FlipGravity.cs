@@ -19,7 +19,7 @@ public class FlipGravity : MonoBehaviour {
 
             // rotate the camera
             camera.GetComponent<RightAngleCam>().upVector = camera.GetComponent<RightAngleCam>().upVector * -1;
-
+            camera.GetComponent<RightAngleCam>().orbitDegreesPerSec = camera.GetComponent<RightAngleCam>().orbitDegreesPerSec * -1;
 
             camera.transform.localPosition = new Vector3(100, 100, 100);
 
