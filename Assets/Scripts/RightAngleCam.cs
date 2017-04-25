@@ -14,6 +14,8 @@ public class RightAngleCam : MonoBehaviour
 
     public float orbitDistance = 10f;
     public float orbitDegreesPerSec = -180.0f;
+    public float minDistance = 3f;
+    public float maxDistance = 10f;
     Vector3 offset;
 
     public RaycastHit obstacleHit;
@@ -30,12 +32,29 @@ public class RightAngleCam : MonoBehaviour
 
     void Update()
     {
+
+        RaycastHit hit;
+
+        // If there is an object between the player and the camera
+        if (Physics.Raycast(player.position, transform.position - player.position, out hit))
+        {
+            // Place the camera in front of the obstacle but also outside of the player
+            orbitDistance = Mathf.Clamp(hit.distance, player.localScale.x, maxDistance);
+            offset = offset.normalized * orbitDistance;
+        }
+        else
+        {
+            // Reset the camera to its normal distance
+            orbitDistance = maxDistance;
+            offset = offset.normalized * orbitDistance;
+        }
+
         if (camRotate)
         {
             Vector3 orbitVector = player.position + (transform.position - player.position).normalized * orbitDistance;
             transform.position = new Vector3(orbitVector.x, orbitVector.y * upVector, orbitVector.z);
             transform.RotateAround(player.position, Vector3.up, orbitDegreesPerSec * Time.deltaTime);
-            //transform.LookAt(player.transform);
+          
             transform.rotation = Quaternion.LookRotation(player.position - transform.position, new Vector3(0, upVector, 0));
             offset = transform.position - player.transform.position;
             offset.y = offset.y * upVector;
