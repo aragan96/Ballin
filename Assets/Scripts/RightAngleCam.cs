@@ -9,7 +9,8 @@ public class RightAngleCam : MonoBehaviour
     [System.NonSerialized]
     public Vector2 camInput;
 
-    public bool camRotate;
+    public bool camRotateLeft;
+    public bool camRotateRight;
 
     public float orbitDistance = 10f;
     public float orbitDegreesPerSec = -180.0f;
@@ -43,9 +44,17 @@ public class RightAngleCam : MonoBehaviour
             orbitDistance = maxDistance;
             offset = offset.normalized * orbitDistance;
         }
-
-        if (camRotate)
+        
+        if (camRotateLeft|| camRotateRight)
         {
+            if (camRotateLeft)
+            {
+                orbitDegreesPerSec = -180.0f;
+            }
+            if (camRotateRight)
+            {
+                orbitDegreesPerSec = 180.0f;
+            }
             Vector3 orbitVector = player.position + (transform.position - player.position).normalized * orbitDistance;
             transform.position = new Vector3(orbitVector.x, orbitVector.y * upVector, orbitVector.z);
             transform.RotateAround(player.position, Vector3.up, orbitDegreesPerSec * Time.deltaTime);
