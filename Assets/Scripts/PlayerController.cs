@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour {
     public float speed;
 	Vector3 latestCheckpoint;
 
+	public GameObject SecondCanvas;
     public Vector2 movementInput;
     public bool growInput;
     public bool shrinkInput;
@@ -90,6 +91,7 @@ public class PlayerController : MonoBehaviour {
 	// Used for saving checkpoints
 	public void SaveCheckpoint(Vector3 pos){
 		latestCheckpoint = pos;
+		StartCoroutine (CheckpointMessage ());
 	}
 
 	public void GoToCheckpoint(){
@@ -111,5 +113,11 @@ public class PlayerController : MonoBehaviour {
 		body.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 
 		body.transform.position = latestCheckpoint;
+	}
+
+	IEnumerator CheckpointMessage(){
+		SecondCanvas.SetActive (true);
+		yield return new WaitForSeconds (2.5f);
+		SecondCanvas.SetActive (false);
 	}
 }

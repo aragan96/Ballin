@@ -18,6 +18,10 @@ public class CheckPoint : MonoBehaviour {
 		if (other.tag == "Player") {
 			other.GetComponentInParent<PlayerController> ().SaveCheckpoint (transform.position);
 			gameObject.GetComponent<Renderer> ().material.color = Color.green;
+
 		}
 	}
+
+	
+
 }
