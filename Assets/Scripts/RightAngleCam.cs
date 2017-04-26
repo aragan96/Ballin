@@ -49,11 +49,11 @@ public class RightAngleCam : MonoBehaviour
         {
             if (camRotateLeft)
             {
-                orbitDegreesPerSec = -180.0f;
+                orbitDegreesPerSec = 180.0f;
             }
             if (camRotateRight)
             {
-                orbitDegreesPerSec = 180.0f;
+                orbitDegreesPerSec = -180.0f;
             }
             Vector3 orbitVector = player.position + (transform.position - player.position).normalized * orbitDistance;
             transform.position = new Vector3(orbitVector.x, orbitVector.y * upVector, orbitVector.z);
