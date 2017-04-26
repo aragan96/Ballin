@@ -59,8 +59,9 @@ public class CameraController : MonoBehaviour {
         RaycastHit hit;
 
         // If there is an object between the player and the camera
-        if (Physics.Raycast(player.position, transform.position, out hit, maxDistance * scale, playerMask))
+        if (Physics.Raycast(player.position, transform.position - player.position, out hit, maxDistance * scale, playerMask))
         {
+            Debug.Log(hit.collider);
             // Place the camera in front of the obstacle but also outside of the player
             distance = Mathf.Clamp(hit.distance, minDistance * scale, maxDistance * scale);
         }
