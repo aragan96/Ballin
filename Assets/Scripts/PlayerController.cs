@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject body;
     private Rigidbody rb;
     public Transform cam;
-
+    
     [System.NonSerialized]
     public CameraController cc;
 
