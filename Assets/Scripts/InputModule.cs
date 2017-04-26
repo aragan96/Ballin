@@ -26,8 +26,8 @@ public class InputModule : MonoBehaviour
         camController.camInput = new Vector2(camHorizontal, camVertical);
 
 
-        rotatingCameraController.camRotateLeft = Input.GetKey(KeyCode.J);
-        rotatingCameraController.camRotateRight = Input.GetKey(KeyCode.K);
+        //rotatingCameraController.camRotateLeft = Input.GetKey(KeyCode.J);
+        //rotatingCameraController.camRotateRight = Input.GetKey(KeyCode.K);
 
 		playerController.growInput = Input.GetMouseButton(1);
 		playerController.shrinkInput = Input.GetMouseButton(0);
