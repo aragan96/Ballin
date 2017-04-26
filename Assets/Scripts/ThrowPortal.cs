@@ -34,7 +34,7 @@ public class ThrowPortal : MonoBehaviour {
 
         Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
         RaycastHit hit;
-        if(Physics.Raycast(ray, out hit, playerMask))
+        if(Physics.Raycast(ray, out hit))
         {
             Quaternion hitObjectRotation = Quaternion.LookRotation(hit.normal);
             portal.transform.position = hit.point;
