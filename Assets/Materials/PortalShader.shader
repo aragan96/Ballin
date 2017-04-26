@@ -74,17 +74,23 @@
 				vOutput.normal = mul(unity_ObjectToWorld, vInput.normal);
 				return vOutput;
 			}
-			
+
 			fixed4 fragmentShader (vertexOutput vInput) : SV_Target
 			{
 				// sample the texture, this means get the pixel on the texture according to its uv coordinates
 				fixed4 col = tex2D(_MainTex, vInput.uv);
 				// apply main color
 				col *= (_Color);
-				col.r = 1;
-				int scale = vInput.worldPosition.y - floor(vInput.worldPosition.y);
-				col.g = (scale + cos(2 * _Time[1])) * 1.5;
-				col.b = 1;
+				col.r = 0;
+				float scale = 0.5 * (vInput.worldPosition.y + 3 * _Time[1]);
+				scale = 0.5 * scale - floor(0.5 * scale);
+				if (0 <= scale && scale < 0.5) {
+					col.g = 0.2 + 0.8 * scale;
+				}
+				else if (0.5 <= scale && scale <= 1) {
+					col.g = 0.2 + 0.8 * (1 - scale);
+				}
+				col.b = 0;
 				col *= calculateLighting(vInput);
 				return col;
 			}
