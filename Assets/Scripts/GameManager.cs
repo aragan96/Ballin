@@ -10,14 +10,13 @@ public class GameManager : MonoBehaviour {
     // instance for Singleton pattern
     public static GameManager instance = null;
 
-    public int numStages;
+    public int numStages = 5;
     public int currentStage = 0;
-    public bool[] stageUnlocked;
+	public bool[] stagesComplete;
 
 	public GameObject pauseMenu;
 
 	Vector3 checkPoint;
-
 	GameObject playerBody;
 
     void Awake()
@@ -33,10 +32,11 @@ public class GameManager : MonoBehaviour {
 
         DontDestroyOnLoad(gameObject);
 
-        stageUnlocked = new bool[numStages + 1];
+		stagesComplete = new bool[numStages + 1];
 
-        for (int i = 0; i < numStages; i++)
-            stageUnlocked[i] = true;
+		for (int i = 0; i < numStages; i++) {
+			stagesComplete [i] = false;
+		}
     }
 
 	// Use this for initialization

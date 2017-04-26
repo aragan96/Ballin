@@ -4,30 +4,27 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Door : MonoBehaviour {
-
-    public bool unlocked;
     public string levelName;
     public GameObject portal;
+	public Light light;
     public int stage;
 
     void Start()
     {
-        unlocked = GameManager.instance.stageUnlocked[stage];
-        portal.SetActive(unlocked);
+		Debug.Log (GameManager.instance.stagesComplete.Length);
+		
+
+		if (GameManager.instance.stagesComplete [stage]) {
+			light.color = Color.green;
+		}
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if(unlocked && other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             SceneManager.LoadScene(levelName);
             GameManager.instance.currentStage = stage;
         }   
-    }
-
-    void Unlock()
-    {
-        unlocked = true;
-        portal.SetActive(true);
     }
 }

@@ -25,8 +25,10 @@ public class InputModule : MonoBehaviour
         float camVertical = Input.GetAxis("Mouse X");
         camController.camInput = new Vector2(camHorizontal, camVertical);
 
-        rotatingCameraController.camRotateLeft = Input.GetKey(KeyCode.J);
-        rotatingCameraController.camRotateRight = Input.GetKey(KeyCode.K);
+		if (rotatingCameraController) {
+			rotatingCameraController.camRotateLeft = Input.GetKey (KeyCode.J);
+			rotatingCameraController.camRotateRight = Input.GetKey (KeyCode.K);
+		}
 
 		playerController.growInput = Input.GetMouseButton(1);
 		playerController.shrinkInput = Input.GetMouseButton(0);

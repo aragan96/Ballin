@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
@@ -98,13 +99,7 @@ public class PlayerController : MonoBehaviour {
 		body.SetActive (false);
 		StartCoroutine (RespawnAtCheckpoint());
 	}
-
-    void OnTriggerEnter(Collider other)
-    {
-		if (other.gameObject.CompareTag ("PickUp")) {
-			other.gameObject.SetActive (false);
-		}
-    }
+		
 
 	IEnumerator RespawnAtCheckpoint(){
 		yield return new WaitForSeconds (2f);
@@ -113,6 +108,7 @@ public class PlayerController : MonoBehaviour {
 		body.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 
 		body.transform.position = latestCheckpoint;
+		body.transform.localScale = new Vector3 (1, 1, 1);
 	}
 
 	IEnumerator CheckpointMessage(){
