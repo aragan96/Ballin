@@ -11,8 +11,6 @@ public class Door : MonoBehaviour {
 
     void Start()
     {
-		Debug.Log (GameManager.instance.stagesComplete.Length);
-		
 
 		if (GameManager.instance.stagesComplete [stage]) {
 			light.color = Color.green;
