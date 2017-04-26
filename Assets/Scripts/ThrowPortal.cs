@@ -7,7 +7,7 @@ public class ThrowPortal : MonoBehaviour {
     public GameObject leftPortal;
     public GameObject rightPortal;
 
-    LayerMask playerMask;
+    public LayerMask playerMask;
 
     GameObject mainCamera;
 
@@ -32,7 +32,7 @@ public class ThrowPortal : MonoBehaviour {
         int y = Screen.height / 2;
         
 
-        Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+        Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
         RaycastHit hit;
         if(Physics.Raycast(ray, out hit))
         {
