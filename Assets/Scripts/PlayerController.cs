@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public static PlayerController instance;
-
+	public float jumpspeed=100f;
     public float speed;
 	Vector3 latestCheckpoint;
 
@@ -53,10 +53,21 @@ public class PlayerController : MonoBehaviour {
 
     void Update()
     {
-        ApplyMovementInput();
-        ApplySizeInput();
+		if (Input.GetKeyDown ("space") && GetComponent<Rigidbody> ().transform.position.y <= 0.6250001f) {
+			Jump ();
+		}
+		ApplyMovementInput ();
+		ApplySizeInput ();
+
+
     }
 
+	public void Jump() {
+		//transform.Translate(Vector3.up * 100 * Time.deltaTime, Space.World);
+		rigidbody.AddForce(new Vector3(0,jumpspeed,0));
+
+		}
+	
     public void ApplyMovementInput()
     {
         Vector3 forward = new Vector3(cam.forward.x, 0.0f, cam.forward.z).normalized;
