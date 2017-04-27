@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
@@ -21,6 +22,8 @@ public class PlayerController : MonoBehaviour {
     public GameObject body;
     private Rigidbody rb;
     public Transform cam;
+
+	public float gravity;
     
     [System.NonSerialized]
     public CameraController cc;
@@ -43,6 +46,9 @@ public class PlayerController : MonoBehaviour {
         rb = GetComponentInChildren<Rigidbody>();
         cc = FindObjectOfType<CameraController>();
 		latestCheckpoint = body.transform.position;
+		Physics.gravity = new Vector3 (0, -gravity, 0);
+
+		Cursor.visible = false;
     }
 
     void Update()
@@ -98,21 +104,17 @@ public class PlayerController : MonoBehaviour {
 		body.SetActive (false);
 		StartCoroutine (RespawnAtCheckpoint());
 	}
-
-    void OnTriggerEnter(Collider other)
-    {
-		if (other.gameObject.CompareTag ("PickUp")) {
-			other.gameObject.SetActive (false);
-		}
-    }
+		
 
 	IEnumerator RespawnAtCheckpoint(){
 		yield return new WaitForSeconds (2f);
 		body.SetActive (true);
 		size = 1;
-		body.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+		rb.velocity = Vector3.zero;
+		rb.angularVelocity = new Vector3(0f,0f,0f);
 
-		body.transform.position = latestCheckpoint;
+		body.transform.position = latestCheckpoint + Vector3.up;
+		//body.transform.localScale = new Vector3 (1, 1, 1);
 	}
 
 	IEnumerator CheckpointMessage(){
