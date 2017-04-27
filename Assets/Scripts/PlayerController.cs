@@ -53,20 +53,20 @@ public class PlayerController : MonoBehaviour {
 
     void Update()
     {
-		if (Input.GetKeyDown ("space") && GetComponent<Rigidbody> ().transform.position.y <= 0.6250001f) {
-			Jump ();
-		}
+		//if (Input.GetKeyDown ("space") && GetComponent<Rigidbody> ().transform.position.y <= 0.6250001f) {
+			//Jump ();
+		//}
 		ApplyMovementInput ();
 		ApplySizeInput ();
 
 
     }
 
-	public void Jump() {
+	/*public void Jump() {
 		//transform.Translate(Vector3.up * 100 * Time.deltaTime, Space.World);
 		rigidbody.AddForce(new Vector3(0,jumpspeed,0));
 
-		}
+		}*/
 	
     public void ApplyMovementInput()
     {
