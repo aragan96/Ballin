@@ -9,9 +9,11 @@ public class Cannon : MonoBehaviour {
     public GameObject player;
     GameObject sliderObject;
     Slider powerBar;
+    GameObject mainCamera;
 
 	// Use this for initialization
 	void Start () {
+        mainCamera = GameObject.FindWithTag("MainCamera");
         sliderObject = GameObject.Find("PowerBar");
         powerBar = sliderObject.GetComponent<Slider>();
         sliderObject.GetComponent<CanvasGroup>().alpha = 0f;
@@ -19,8 +21,19 @@ public class Cannon : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
-            if (Input.GetKeyDown(KeyCode.Alpha6)&&playerOnCannon)
+
+        if (playerOnCannon)
+        {
+            int x = Screen.width / 2;
+            int y = (Screen.height / 2);
+            Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                transform.GetChild(1).transform.LookAt(hit.point);
+                player.transform.GetChild(2).transform.position = transform.GetChild(1).transform.GetChild(2).transform.position;
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha6) && playerOnCannon)
             {
                 GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
                 Vector3 fireDirection = camera.transform.forward;
@@ -30,6 +43,7 @@ public class Cannon : MonoBehaviour {
                 playerOnCannon = false;
                 sliderObject.GetComponent<CanvasGroup>().alpha = 0f;
             }
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -37,7 +51,7 @@ public class Cannon : MonoBehaviour {
         if (other.gameObject.CompareTag("Player"))
         {
             playerOnCannon = true;
-            Vector3 firePos = transform.GetChild(3).transform.position;
+            Vector3 firePos = transform.GetChild(1).transform.GetChild(2).transform.position;
             other.transform.position = firePos;
             other.GetComponent<Rigidbody>().useGravity = false;
             other.GetComponent<Rigidbody>().isKinematic = true;

@@ -10,8 +10,7 @@ public class CannonPowerBar : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        GameObject temp = GameObject.Find("PowerBar");
-        powerBar = temp.GetComponent<Slider>();
+        powerBar = GetComponent<Slider>();
 	}
 	
 	// Update is called once per frame
