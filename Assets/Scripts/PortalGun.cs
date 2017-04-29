@@ -8,6 +8,7 @@ public class PortalGun : MonoBehaviour
     public bool gunOnTop = false;
     public GameObject playerBody;
     Vector3 offset;
+    public float size;
 
     GameObject mainCamera;
 

@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour {
 
         DontDestroyOnLoad(gameObject);
 
-		stagesComplete = new bool[numStages + 1];
+		stagesComplete = new bool[numStages];
 
 		for (int i = 0; i < numStages; i++) {
 			stagesComplete [i] = false;
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour {
 	void Start () {
 
         
-        if(SceneManager.GetActiveScene().name == "MainMenu")
+        if(SceneManager.GetActiveScene().name == "Main Menu")
         {
             currentStage = -1;
             Cursor.visible = true;
@@ -54,8 +54,15 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        // ESC is pause except in main menu
 		if (currentStage >= 0 && Input.GetKeyDown (KeyCode.Escape)) {
-			TogglePause ();
+            if(paused)
+            {
+                Unpause();
+            } else
+            {
+                Pause();
+            }
 		}
 	}
 
@@ -66,36 +73,41 @@ public class GameManager : MonoBehaviour {
         SceneManager.LoadScene(startLevel);
     }
 
-    public void TogglePause()
+    public void Pause()
 	{
-        paused = !paused;
+        paused = true;
 
-		// Show pause menu
-		pauseMenu.SetActive(paused);
-        Cursor.visible = (paused) || (currentStage == -1);
+        // Show pause menu and cursor
+        pauseMenu.SetActive(true);
+        Cursor.visible = true;
 
-        // Freeze the game
-        if (paused)
+        Time.timeScale = 0;
+    }
+
+    public void Unpause()
+    {
+        paused = false;
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1;
+
+        //Hide cursor unless returning to main menu
+        if(currentStage >= 0)
         {
-            Time.timeScale = 0;
-        } else
-        {
-            Time.timeScale = 1;
+            Cursor.visible = false;
         }
-
-	}
+    }
 
 	public void Restart(){
-        PlayerController.instance.latestCheckpoint = new Vector3(0, 0, 0);
+        PlayerController.instance.latestCheckpoint = new Vector3(0, 0.5f, 0);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-		TogglePause ();
+        Unpause();
 	}
 
 	public void MainMenu(){
-        PlayerController.instance.latestCheckpoint = new Vector3(0, 0, 0);
+        PlayerController.instance.latestCheckpoint = new Vector3(0, 0.5f, 0);
         SceneManager.LoadScene ("Main Menu");
         currentStage = -1;
-        TogglePause();
+        Unpause();
     }
 
 	public void Quit()

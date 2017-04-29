@@ -39,6 +39,9 @@ public class ThrowPortal : MonoBehaviour {
                 Quaternion hitObjectRotation = Quaternion.LookRotation(hit.normal);
                 portal.transform.position = hit.point;
                 portal.transform.rotation = hitObjectRotation;
+                if (hit.transform.gameObject.GetComponent<MovingPlatform>() != null) { 
+                portal.transform.parent = hit.transform;
+                }
             }
         }
     }
