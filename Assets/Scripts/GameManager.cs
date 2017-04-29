@@ -10,6 +10,10 @@ public class GameManager : MonoBehaviour {
     // instance for Singleton pattern
     public static GameManager instance = null;
 
+    public bool paused = false;
+
+    public string startLevel;
+
     public int numStages = 5;
     public int currentStage = 0;
 	public bool[] stagesComplete;
@@ -39,45 +43,59 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+        currentStage = -1;
+        if(SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            Cursor.visible = true;
+        }
+        
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.Escape)) {
-			Pause ();
+		if (currentStage >= 0 && Input.GetKeyDown (KeyCode.Escape)) {
+			TogglePause ();
 		}
 	}
 
-	public void Pause()
+    public void BeginGame()
+    {
+        currentStage = 0;
+        Cursor.visible = false;
+        SceneManager.LoadScene(startLevel);
+    }
+
+    public void TogglePause()
 	{
+        paused = !paused;
+
 		// Show pause menu
-		pauseMenu.SetActive(true);
+		pauseMenu.SetActive(paused);
+        Cursor.visible = (paused) || (currentStage == -1);
 
-		// Freeze the game
-		Time.timeScale = 0;
+        // Freeze the game
+        if (paused)
+        {
+            Time.timeScale = 0;
+        } else
+        {
+            Time.timeScale = 1;
+        }
 
-	}
-
-	public void Unpause()
-	{
-		// Hide pause menu
-		pauseMenu.SetActive(false);
-
-		// Unfreeze the game
-		Time.timeScale = 1;
-
-		pauseMenu.SetActive (false);
 	}
 
 	public void Restart(){
-		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-		Unpause ();
+        PlayerController.instance.latestCheckpoint = new Vector3(0, 0, 0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		TogglePause ();
 	}
 
 	public void MainMenu(){
         PlayerController.instance.latestCheckpoint = new Vector3(0, 0, 0);
-		SceneManager.LoadScene ("Main Menu");
-	}
+        SceneManager.LoadScene ("Main Menu");
+        currentStage = -1;
+        TogglePause();
+    }
 
 	public void Quit()
 	{

@@ -22,6 +22,7 @@ public class Door : MonoBehaviour {
         if (other.CompareTag("Player"))
         {
             SceneManager.LoadScene(levelName);
+            PlayerController.instance.latestCheckpoint = new Vector3(0, 0, 0);
             GameManager.instance.currentStage = stage;
         }   
     }

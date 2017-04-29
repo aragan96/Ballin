@@ -53,9 +53,10 @@ public class PlayerController : MonoBehaviour {
 
     void Update()
     {
-		//if (Input.GetKeyDown ("space") && GetComponent<Rigidbody> ().transform.position.y <= 0.6250001f) {
-			//Jump ();
-		//}
+		if(GameManager.instance.paused)
+        {
+            return;
+        }
 		ApplyMovementInput ();
 		ApplySizeInput ();
     }
