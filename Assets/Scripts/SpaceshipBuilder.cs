@@ -28,6 +28,7 @@ public class SpaceshipBuilder : MonoBehaviour {
             {
                 parts[i].SetActive(false);
             }
+            transform.localScale = new Vector3(7.5f, 0.1f, 7.5f);
             transform.position = new Vector3(0, 0, 0);
             completeShip.SetActive(true);
         } else
