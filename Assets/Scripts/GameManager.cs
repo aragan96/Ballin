@@ -16,8 +16,6 @@ public class GameManager : MonoBehaviour {
 
 	public GameObject pauseMenu;
 
-	GameObject playerBody;
-
     void Awake()
     {
 
@@ -40,7 +38,7 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		playerBody = GameObject.Find ("Player/Body");
+
 	}
 	
 	// Update is called once per frame
@@ -77,6 +75,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void MainMenu(){
+        PlayerController.instance.latestCheckpoint = new Vector3(0, 0, 0);
 		SceneManager.LoadScene ("Main Menu");
 	}
 

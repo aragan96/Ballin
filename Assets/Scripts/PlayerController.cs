@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour {
     public static PlayerController instance;
 	public float jumpspeed=100f;
     public float speed;
-	Vector3 latestCheckpoint;
+	public Vector3 latestCheckpoint;
 
 	public GameObject SecondCanvas;
     public Vector2 movementInput;
@@ -58,8 +58,6 @@ public class PlayerController : MonoBehaviour {
 		//}
 		ApplyMovementInput ();
 		ApplySizeInput ();
-
-
     }
 
 	/*public void Jump() {
