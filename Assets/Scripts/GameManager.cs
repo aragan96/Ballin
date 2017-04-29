@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour {
 
 	public GameObject pauseMenu;
 
-	Vector3 checkPoint;
 	GameObject playerBody;
 
     void Awake()
@@ -42,7 +41,6 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		playerBody = GameObject.Find ("Player/Body");
-		checkPoint = playerBody.transform.position;
 	}
 	
 	// Update is called once per frame

@@ -6,14 +6,14 @@ using UnityEngine.SceneManagement;
 public class Door : MonoBehaviour {
     public string levelName;
     public GameObject portal;
-	public Light light;
+	public Light myLight;
     public int stage;
 
     void Start()
     {
 
 		if (GameManager.instance.stagesComplete [stage]) {
-			light.color = Color.green;
+			myLight.color = Color.green;
 		}
     }
 
