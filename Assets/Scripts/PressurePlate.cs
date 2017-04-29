@@ -39,7 +39,6 @@ public class PressurePlate : MonoBehaviour {
 
     void OnTriggerExit (Collider other)
     {
-        Debug.Log("hi");
         if (doorToOpen.closingDoor && doorToOpen.doorOpen)
         {
             doorToOpen.CloseDoor();
