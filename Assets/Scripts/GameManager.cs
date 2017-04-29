@@ -43,9 +43,10 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        currentStage = -1;
+        
         if(SceneManager.GetActiveScene().name == "MainMenu")
         {
+            currentStage = -1;
             Cursor.visible = true;
         }
         

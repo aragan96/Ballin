@@ -27,14 +27,11 @@ public class CameraController : MonoBehaviour {
     private float angleX;
     private float angleY;
 
-    public int upVector;
-
     void Start()
     {
         distance = maxDistance;
-        angleX = -90;
+        angleX = -20;
         angleY = 0;
-        upVector = 1;
     }
 
     void Update()
@@ -71,8 +68,7 @@ public class CameraController : MonoBehaviour {
         }
 
         offset *= distance;
-
         transform.position = player.position + offset;
-        transform.rotation = Quaternion.LookRotation(player.position - transform.position, new Vector3(0, upVector, 0));
+        transform.rotation = Quaternion.LookRotation(player.position - transform.position, new Vector3(0, 1, 0));
     }
 }
