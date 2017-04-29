@@ -53,19 +53,17 @@ public class PlayerController : MonoBehaviour {
 
     void Update()
     {
+
 		if(GameManager.instance.paused)
         {
             return;
         }
+
+
 		ApplyMovementInput ();
 		ApplySizeInput ();
     }
 
-	/*public void Jump() {
-		//transform.Translate(Vector3.up * 100 * Time.deltaTime, Space.World);
-		rigidbody.AddForce(new Vector3(0,jumpspeed,0));
-
-		}*/
 	
     public void ApplyMovementInput()
     {
@@ -102,6 +100,19 @@ public class PlayerController : MonoBehaviour {
 	// Used for launching platforms
 	public void Bounce(float power){
 		rb.velocity = Vector3.up * power;
+	}
+
+	//when hitting an obstacle (fire) 
+	void OnTriggerEnter(Collider other){
+		if (other.tag == "Fire") {
+			other.GetComponentInParent<PlayerController> ().GoToCheckpoint();
+		}
+	}
+	//To jump when hitting space 
+	public void Jump(float jump){
+		if (Input.GetKeyDown(KeyCode.Space)){
+			rb.velocity = Vector3.up * jump;
+		}
 	}
 
 	// Used for saving checkpoints
