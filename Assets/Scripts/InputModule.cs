@@ -8,15 +8,12 @@ public class InputModule : MonoBehaviour
     PlayerController playerController;
     CameraController camController;
 
-    RightAngleCam rotatingCameraController;
-
     public Camera cam;
 
     void Start()
     {
         playerController = GetComponent<PlayerController>();
         camController = cam.GetComponent<CameraController>();
-        rotatingCameraController = cam.GetComponent<RightAngleCam>();
     }
 
     void Update()
@@ -25,9 +22,6 @@ public class InputModule : MonoBehaviour
         float camVertical = Input.GetAxis("Mouse X");
         camController.camInput = new Vector2(camHorizontal, camVertical);
 
-
-        //rotatingCameraController.camRotateLeft = Input.GetKey(KeyCode.J);
-        //rotatingCameraController.camRotateRight = Input.GetKey(KeyCode.K);
 
 		playerController.growInput = Input.GetMouseButton(1);
 		playerController.shrinkInput = Input.GetMouseButton(0);

@@ -11,13 +11,11 @@ public class SlidingDoor : MonoBehaviour {
 	// trigger to control opening
 	public bool doorOpen;
 
-	// where the door should end up at end of animation
-	Vector3 targetPos;
-	Vector3 startPos;
+    // where the door should end up at end of animation
+    Vector3 targetPos;
 	
 	// Use this for initialization
 	void Start () {
-		startPos = transform.position;
 		targetPos = new Vector3 (transform.position.x + openDistance, transform.position.y, transform.position.z);
 		doorOpen = false;
 	}

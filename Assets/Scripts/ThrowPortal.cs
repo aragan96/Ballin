@@ -8,12 +8,10 @@ public class ThrowPortal : MonoBehaviour {
     public GameObject rightPortal;
     public bool portalGunAttached;
 
-    GameObject mainCamera;
     GameObject portalGun;
 
 	// Use this for initialization
 	void Start () {
-        mainCamera = GameObject.FindWithTag("MainCamera");
         portalGun = GameObject.FindWithTag("PortalGun");
 	}
 	
