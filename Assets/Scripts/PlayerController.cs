@@ -53,16 +53,18 @@ public class PlayerController : MonoBehaviour {
 
     void Update()
     {
-
-		if(GameManager.instance.paused)
-        {
-            return;
-        }
-
-		ApplyMovementInput ();
+        //if (Input.GetKeyDown ("space") && GetComponent<Rigidbody> ().transform.position.y <= 0.6250001f) {
+        //Jump ();
+        //}
+        ApplyMovementInput ();
 		ApplySizeInput ();
     }
 
+	/*public void Jump() {
+		//transform.Translate(Vector3.up * 100 * Time.deltaTime, Space.World);
+		rigidbody.AddForce(new Vector3(0,jumpspeed,0));
+
+		}*/
 	
     public void ApplyMovementInput()
     {
@@ -85,33 +87,29 @@ public class PlayerController : MonoBehaviour {
         if(growInput && (size < maxSize))
         {
             size = Mathf.Min(size + 0.05f, maxSize);
+           /* if (GetComponent<ThrowPortal>().portalGunAttached)
+            {
+                GameObject.FindGameObjectWithTag("PortalGun").GetComponent<PortalGun>().size = Mathf.Min(GameObject.FindGameObjectWithTag("PortalGun").GetComponent<PortalGun>().size + 0.05f, maxSize); 
+            }*/
         }
 
         if(shrinkInput && (size > minSize))
         {
             size = Mathf.Max(size - 0.05f, minSize);
+           /* if (GetComponent<ThrowPortal>().portalGunAttached)
+            {
+                GameObject.FindGameObjectWithTag("PortalGun").GetComponent<PortalGun>().size = Mathf.Max(GameObject.FindGameObjectWithTag("PortalGun").GetComponent<PortalGun>().size - 0.05f, minSize);
+            }*/
         }
 
         cc.scale = size;
         body.transform.localScale = new Vector3(size, size, size);
+       // GameObject.FindGameObjectWithTag("PortalGun").transform.localScale = new Vector3(GameObject.FindGameObjectWithTag("PortalGun").GetComponent<PortalGun>().size, GameObject.FindGameObjectWithTag("PortalGun").GetComponent<PortalGun>().size, GameObject.FindGameObjectWithTag("PortalGun").GetComponent<PortalGun>().size);
     }
 
 	// Used for launching platforms
 	public void Bounce(float power){
 		rb.velocity = Vector3.up * power;
-	}
-
-	//when hitting an obstacle (fire) 
-	void OnTriggerEnter(Collider other){
-		if (other.tag == "Fire") {
-			other.GetComponentInParent<PlayerController> ().GoToCheckpoint();
-		}
-	}
-	//To jump when hitting space 
-	public void Jump(float jump){
-		if (Input.GetKeyDown(KeyCode.Space)){
-			rb.velocity = Vector3.up * jump;
-		}
 	}
 
 	// Used for saving checkpoints
@@ -134,8 +132,7 @@ public class PlayerController : MonoBehaviour {
 		rb.angularVelocity = new Vector3(0f,0f,0f);
 
 		body.transform.position = latestCheckpoint + Vector3.up;
-        body.transform.localScale = new Vector3 (1, 1, 1);
-        cc.scale = 1;
+		//body.transform.localScale = new Vector3 (1, 1, 1);
 	}
 
 	IEnumerator CheckpointMessage(){
