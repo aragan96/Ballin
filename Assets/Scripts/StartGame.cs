@@ -5,19 +5,9 @@ using UnityEngine;
 
 public class StartGame : MonoBehaviour {
 
-	public string startLevel;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
+	public void Begin()
+    {
+        GameManager.instance.BeginGame();
+    }
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-	public void BeginGame(){
-		SceneManager.LoadScene (startLevel);
-	}
 }

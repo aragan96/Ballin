@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fire : MonoBehaviour {
+public class Collectable : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -12,7 +12,5 @@ public class Fire : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		
 	}
-
 }
