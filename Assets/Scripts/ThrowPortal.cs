@@ -6,39 +6,40 @@ public class ThrowPortal : MonoBehaviour {
 
     public GameObject leftPortal;
     public GameObject rightPortal;
-
-    public LayerMask playerMask;
-
-    GameObject mainCamera;
+    public bool portalGunAttached;
+    GameObject portalGun;
 
 	// Use this for initialization
 	void Start () {
-        mainCamera = GameObject.FindWithTag("MainCamera");
+        portalGun = GameObject.FindWithTag("PortalGun");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.Alpha3)){
-            throwPortal(leftPortal);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
+        if (portalGunAttached)
         {
-            throwPortal(rightPortal);
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                throwPortal(leftPortal);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                throwPortal(rightPortal);
+            }
         }
 	}
 
     void throwPortal(GameObject portal){
-        int x = Screen.width / 2;
-        int y = Screen.height / 2;
-        
-
-        Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
         RaycastHit hit;
-        if(Physics.Raycast(ray, out hit))
+        Vector3 fwd = portalGun.transform.GetChild(1).transform.forward;
+        if (Physics.Raycast(portalGun.transform.GetChild(1).transform.position, fwd * 50, out hit) && hit.collider != null)
         {
-            Quaternion hitObjectRotation = Quaternion.LookRotation(hit.normal);
-            portal.transform.position = hit.point;
-            portal.transform.rotation = hitObjectRotation;
+            if (hit.collider.CompareTag("PortalWall"))
+            {
+                Quaternion hitObjectRotation = Quaternion.LookRotation(hit.normal);
+                portal.transform.position = hit.point;
+                portal.transform.rotation = hitObjectRotation;
+            }
         }
     }
 }

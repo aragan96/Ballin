@@ -10,6 +10,9 @@ public class SlidingDoor : MonoBehaviour {
 
 	// trigger to control opening
 	public bool doorOpen;
+    public bool doorClose = true;
+
+    public bool closingDoor = false;
 
 	// where the door should end up at end of animation
 	Vector3 targetPos;
@@ -28,10 +31,21 @@ public class SlidingDoor : MonoBehaviour {
 			float step = speed * Time.deltaTime;
 			transform.position = Vector3.MoveTowards (transform.position, targetPos, step);
 		}
+        if (doorClose)
+        {
+            float step = speed * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, startPos, step);
+        }
 	}
 
 	public void OpenDoor(){
 		doorOpen = true;
+        doorClose = false;
 	}
 			
+    public void CloseDoor()
+    {
+        doorOpen = false;
+        doorClose = true;
+    }
 }
