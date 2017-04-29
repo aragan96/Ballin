@@ -39,6 +39,7 @@ public class ThrowPortal : MonoBehaviour {
                 Quaternion hitObjectRotation = Quaternion.LookRotation(hit.normal);
                 portal.transform.position = hit.point;
                 portal.transform.rotation = hitObjectRotation;
+                //portal.transform.parent = hit.transform;
             }
         }
     }
