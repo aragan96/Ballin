@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour {
 
         DontDestroyOnLoad(gameObject);
 
-		stagesComplete = new bool[numStages + 1];
+		stagesComplete = new bool[numStages];
 
 		for (int i = 0; i < numStages; i++) {
 			stagesComplete [i] = false;
