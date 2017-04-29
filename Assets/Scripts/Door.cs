@@ -11,7 +11,6 @@ public class Door : MonoBehaviour {
 
     void Start()
     {
-
 		if (GameManager.instance.stagesComplete [stage]) {
 			myLight.color = Color.green;
 		}
@@ -22,7 +21,7 @@ public class Door : MonoBehaviour {
         if (other.CompareTag("Player"))
         {
             SceneManager.LoadScene(levelName);
-            PlayerController.instance.latestCheckpoint = new Vector3(0, 0, 0);
+            PlayerController.instance.latestCheckpoint = new Vector3(0, 0.5f, 0);
             GameManager.instance.currentStage = stage;
         }   
     }

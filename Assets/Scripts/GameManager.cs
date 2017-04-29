@@ -86,13 +86,13 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void Restart(){
-        PlayerController.instance.latestCheckpoint = new Vector3(0, 0, 0);
+        PlayerController.instance.latestCheckpoint = new Vector3(0, 0.5f, 0);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 		TogglePause ();
 	}
 
 	public void MainMenu(){
-        PlayerController.instance.latestCheckpoint = new Vector3(0, 0, 0);
+        PlayerController.instance.latestCheckpoint = new Vector3(0, 0.5f, 0);
         SceneManager.LoadScene ("Main Menu");
         currentStage = -1;
         TogglePause();
