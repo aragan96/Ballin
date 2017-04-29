@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public static PlayerController instance;
-	public float jumpspeed=100f;
+	public float jump=10;
     public float speed;
 	public Vector3 latestCheckpoint;
 
@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour {
 
 		ApplyMovementInput ();
 		ApplySizeInput ();
+		Jump (jump);
     }
 
 	
@@ -103,11 +104,11 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	//when hitting an obstacle (fire) 
-	void OnTriggerEnter(Collider other){
+	/*void OnTriggerEnter(Collider other){
 		if (other.tag == "Fire") {
 			other.GetComponentInParent<PlayerController> ().GoToCheckpoint();
 		}
-	}
+	}*/
 	//To jump when hitting space 
 	public void Jump(float jump){
 		if (Input.GetKeyDown(KeyCode.Space)){
