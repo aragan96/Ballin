@@ -6,19 +6,9 @@ public class StepThroughPortal : MonoBehaviour {
 
     public GameObject otherPortal;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" || other.tag == "DoorKey")
         {
             Rigidbody rb = other.GetComponent<Rigidbody>();
             float currVelMag = rb.velocity.magnitude;
