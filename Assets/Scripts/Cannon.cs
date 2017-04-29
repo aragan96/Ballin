@@ -32,8 +32,7 @@ public class Cannon : MonoBehaviour {
                 transform.GetChild(1).transform.LookAt(hit.point);
                 player.transform.GetChild(2).transform.position = transform.GetChild(1).transform.GetChild(2).transform.position;
             }
-            if (Input.GetKeyDown(KeyCode.Alpha6) && playerOnCannon)
-
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
                 Vector3 fireDirection = camera.transform.forward;
