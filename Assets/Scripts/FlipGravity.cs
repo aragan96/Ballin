@@ -13,7 +13,7 @@ public class FlipGravity : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.Alpha5)) 
+        if (Input.GetKeyDown(KeyCode.G)) 
         {
             Physics.gravity *= -1;
 
