@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody rb;
     public Transform cam;
 
+    PortalGun portalGun;
+
 	public float gravity;
     
     [System.NonSerialized]
@@ -47,24 +49,15 @@ public class PlayerController : MonoBehaviour {
         cc = FindObjectOfType<CameraController>();
 		latestCheckpoint = body.transform.position;
 		Physics.gravity = new Vector3 (0, -gravity, 0);
-
-		Cursor.visible = false;
+        portalGun = GameObject.FindGameObjectWithTag("PortalGun").GetComponent<PortalGun>();
+        Cursor.visible = false;
     }
 
     void Update()
     {
-        //if (Input.GetKeyDown ("space") && GetComponent<Rigidbody> ().transform.position.y <= 0.6250001f) {
-        //Jump ();
-        //}
         ApplyMovementInput ();
 		ApplySizeInput ();
     }
-
-	/*public void Jump() {
-		//transform.Translate(Vector3.up * 100 * Time.deltaTime, Space.World);
-		rigidbody.AddForce(new Vector3(0,jumpspeed,0));
-
-		}*/
 	
     public void ApplyMovementInput()
     {
@@ -87,24 +80,24 @@ public class PlayerController : MonoBehaviour {
         if(growInput && (size < maxSize))
         {
             size = Mathf.Min(size + 0.05f, maxSize);
-           /* if (GetComponent<ThrowPortal>().portalGunAttached)
+           if (transform.GetChild(2).GetComponent<ThrowPortal>().portalGunAttached)
             {
-                GameObject.FindGameObjectWithTag("PortalGun").GetComponent<PortalGun>().size = Mathf.Min(GameObject.FindGameObjectWithTag("PortalGun").GetComponent<PortalGun>().size + 0.05f, maxSize); 
-            }*/
+                portalGun.size = Mathf.Min(portalGun.size + 0.025f, maxSize);
+            }
         }
 
         if(shrinkInput && (size > minSize))
         {
             size = Mathf.Max(size - 0.05f, minSize);
-           /* if (GetComponent<ThrowPortal>().portalGunAttached)
+            if (transform.GetChild(2).GetComponent<ThrowPortal>().portalGunAttached)
             {
-                GameObject.FindGameObjectWithTag("PortalGun").GetComponent<PortalGun>().size = Mathf.Max(GameObject.FindGameObjectWithTag("PortalGun").GetComponent<PortalGun>().size - 0.05f, minSize);
-            }*/
+                portalGun.size = Mathf.Max(portalGun.size - 0.025f, minSize);
+            }
         }
 
         cc.scale = size;
         body.transform.localScale = new Vector3(size, size, size);
-       // GameObject.FindGameObjectWithTag("PortalGun").transform.localScale = new Vector3(GameObject.FindGameObjectWithTag("PortalGun").GetComponent<PortalGun>().size, GameObject.FindGameObjectWithTag("PortalGun").GetComponent<PortalGun>().size, GameObject.FindGameObjectWithTag("PortalGun").GetComponent<PortalGun>().size);
+        portalGun.gameObject.transform.localScale = new Vector3(portalGun.size, portalGun.size, portalGun.size);
     }
 
 	// Used for launching platforms
