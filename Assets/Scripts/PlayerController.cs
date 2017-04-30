@@ -62,13 +62,9 @@ public class PlayerController : MonoBehaviour {
         {
             return;
         }
-        //if (Input.GetKeyDown ("space") && GetComponent<Rigidbody> ().transform.position.y <= 0.6250001f) {
-        //Jump ();
-        //}
 
         ApplyMovementInput ();
 		ApplySizeInput ();
-		Jump (jump);
     }
 	
     public void ApplyMovementInput()
@@ -118,19 +114,6 @@ public class PlayerController : MonoBehaviour {
 	// Used for launching platforms
 	public void Bounce(float power){
 		rb.velocity = Vector3.up * power;
-	}
-
-	//when hitting an obstacle (fire) 
-	/*void OnTriggerEnter(Collider other){
-		if (other.tag == "Fire") {
-			other.GetComponentInParent<PlayerController> ().GoToCheckpoint();
-		}
-	}*/
-	//To jump when hitting space 
-	public void Jump(float jump){
-		if (Input.GetKeyDown(KeyCode.Space)){
-			rb.velocity = Vector3.up * jump;
-		}
 	}
 
 	// Used for saving checkpoints

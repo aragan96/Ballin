@@ -5,8 +5,8 @@ using UnityEngine;
 public class FlipGravity : MonoBehaviour {
 	
 	// Update is called once per frame
-	void Update () {
-        if (Input.GetKeyDown(KeyCode.G)) 
+	void OnTriggerEnter (Collider other) {
+        if (other.tag == "Player") 
         {
             Physics.gravity *= -1;            
         }
