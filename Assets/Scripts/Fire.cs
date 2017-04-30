@@ -9,23 +9,26 @@ public class Fire : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//playerrb = GameObject.FindGameObjectWithTag ("Player").GetChild(2).GetComponent<Rigidbody>();
+
 		player=GameObject.FindGameObjectWithTag("Player");
+	}
+	void Update () {
+
 	}
 
 
-	void OnCollisionEnter(Collision collision){
-		if (other.tag == "Player") {
-			player.GetComponentInParent<PlayerController> ().GoToCheckpoint ();
-			Destroy (player);
+	void OnParticleCollision(GameObject player){
+			Rigidbody body = player.GetComponent<Rigidbody>();
+			if (body) {
+				player.GetComponentInParent<PlayerController> ().GoToCheckpoint ();
+				Destroy (player);
+			}
 		}
 	}
 	// Update is called once per frame
-	void Update () {
-		
-		
-	}
 
 
-	}
+
+	
 
 
