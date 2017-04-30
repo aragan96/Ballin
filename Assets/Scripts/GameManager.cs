@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
     // instance for Singleton pattern
     public static GameManager instance = null;
 
+    public bool pauseInput;
     public bool paused = false;
 
     public string startLevel;
@@ -60,7 +61,7 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         // ESC is pause except in main menu
-		if (currentStage >= 0 && Input.GetKeyDown (KeyCode.Escape)) {
+		if (currentStage >= 0 && pauseInput) {
             if(paused)
             {
                 Unpause();
@@ -74,6 +75,7 @@ public class GameManager : MonoBehaviour {
     public void BeginGame()
     {
         Cursor.visible = false;
+        currentStage = 0;
         SceneManager.LoadScene(startLevel);
     }
 

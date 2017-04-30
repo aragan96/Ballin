@@ -24,6 +24,8 @@ public class InputModule : MonoBehaviour
 
 		playerController.growInput = Input.GetMouseButton(1);
 		playerController.shrinkInput = Input.GetMouseButton(0);
+
+        GameManager.instance.pauseInput = Input.GetKeyDown(KeyCode.Escape);
     }
 
     void FixedUpdate()
