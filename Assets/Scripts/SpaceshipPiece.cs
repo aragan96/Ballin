@@ -8,7 +8,8 @@ public class SpaceshipPiece : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		if (other.gameObject.CompareTag ("Player")) {
 			GameManager.instance.stagesComplete [GameManager.instance.currentStage] = true;
-			SceneManager.LoadScene ("Lobby");
+            GameManager.instance.currentStage = -1;
+            SceneManager.LoadScene ("Lobby");
 		}
 	}
 }

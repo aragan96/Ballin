@@ -14,8 +14,13 @@ public class GameManager : MonoBehaviour {
 
     public string startLevel;
 
-    public int numStages = 5;
-    public int currentStage = 0;
+    // Number of collectables
+    public int numCollectables = 3;
+
+    // ID of current level (-1 if there is no collectable)
+    public int currentStage;
+
+    // Collectables collected
 	public bool[] stagesComplete;
 
 	public GameObject pauseMenu;
@@ -33,9 +38,9 @@ public class GameManager : MonoBehaviour {
 
         DontDestroyOnLoad(gameObject);
 
-		stagesComplete = new bool[numStages];
+		stagesComplete = new bool[numCollectables];
 
-		for (int i = 0; i < numStages; i++) {
+		for (int i = 0; i < numCollectables; i++) {
 			stagesComplete [i] = false;
 		}
     }
@@ -68,7 +73,6 @@ public class GameManager : MonoBehaviour {
 
     public void BeginGame()
     {
-        currentStage = 0;
         Cursor.visible = false;
         SceneManager.LoadScene(startLevel);
     }
