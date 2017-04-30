@@ -138,7 +138,8 @@ public class PlayerController : MonoBehaviour {
 		rb.angularVelocity = new Vector3(0f,0f,0f);
 
 		body.transform.position = latestCheckpoint + Vector3.up;
-		//body.transform.localScale = new Vector3 (1, 1, 1);
+		body.transform.localScale = new Vector3 (1, 1, 1);
+        cc.scale = 1;
 	}
 
 	IEnumerator CheckpointMessage(){
