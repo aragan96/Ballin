@@ -4,17 +4,15 @@ using UnityEngine;
 
 public class PortalGun : MonoBehaviour
 {
-
+    //
     public bool gunOnTop = false;
     public GameObject playerBody;
     Vector3 offset;
     public float size;
-
-    //public GameObject target;
-
+    
+    //Used for the targeting
     RectTransform target;
     RectTransform canvasRect;
-
     GameObject mainCamera;
 
     // Use this for initialization
