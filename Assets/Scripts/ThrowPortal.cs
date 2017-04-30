@@ -18,11 +18,11 @@ public class ThrowPortal : MonoBehaviour {
 	void Update () {
         if (portalGunAttached)
         {
-            if (Input.GetKeyDown(KeyCode.Alpha3))
+            if (Input.GetKeyDown(KeyCode.Q))
             {
                 throwPortal(leftPortal);
             }
-            if (Input.GetKeyDown(KeyCode.Alpha4))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 throwPortal(rightPortal);
             }
@@ -30,6 +30,7 @@ public class ThrowPortal : MonoBehaviour {
 	}
 
     void throwPortal(GameObject portal){
+        portal.transform.parent = null;
         RaycastHit hit;
         Vector3 fwd = portalGun.transform.GetChild(1).transform.forward;
         if (Physics.Raycast(portalGun.transform.GetChild(1).transform.position, fwd * 50, out hit) && hit.collider != null)
@@ -39,8 +40,9 @@ public class ThrowPortal : MonoBehaviour {
                 Quaternion hitObjectRotation = Quaternion.LookRotation(hit.normal);
                 portal.transform.position = hit.point;
                 portal.transform.rotation = hitObjectRotation;
-                if (hit.transform.gameObject.GetComponent<MovingPlatform>() != null) { 
-                portal.transform.parent = hit.transform;
+                if (hit.transform.gameObject.GetComponent<MovingPlatform>() != null)
+                {
+                    portal.transform.parent = hit.transform;
                 }
             }
         }
