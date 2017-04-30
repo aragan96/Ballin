@@ -10,6 +10,8 @@ public class GameComplete : MonoBehaviour {
     bool liftOff = false;
     float speed = 0.1f;
 
+    // Once the player enters the jet, shows the final scene
+    // and victory menu
 
     void Update()
     {

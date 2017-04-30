@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Door : MonoBehaviour {
+    // Door which transports player to specified level
+
     public string levelName;
     public GameObject portal;
 	public Light myLight;
@@ -11,6 +13,7 @@ public class Door : MonoBehaviour {
 
     void Start()
     {
+        // Light above reflects the completion of stage within
 		if (GameManager.instance.stagesComplete [stage]) {
 			myLight.color = Color.green;
 		}

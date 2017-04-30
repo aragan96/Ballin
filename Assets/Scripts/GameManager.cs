@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     //MODIFIED GameManager script from Unity's GameManager tutorial
+    // Manages game state in relation to player input and level completion
 
     // instance for Singleton pattern
     public static GameManager instance = null;
