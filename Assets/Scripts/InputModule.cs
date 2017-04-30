@@ -7,6 +7,7 @@ public class InputModule : MonoBehaviour
 
     PlayerController playerController;
     CameraController camController;
+    ThrowPortal portalControl;
 
     public Camera cam;
 
@@ -14,6 +15,7 @@ public class InputModule : MonoBehaviour
     {
         playerController = GetComponent<PlayerController>();
         camController = cam.GetComponent<CameraController>();
+        portalControl = GetComponentInChildren<ThrowPortal>();
     }
 
     void Update()
@@ -26,6 +28,12 @@ public class InputModule : MonoBehaviour
 		playerController.shrinkInput = Input.GetMouseButton(0);
 
         GameManager.instance.pauseInput = Input.GetKeyDown(KeyCode.Escape);
+
+        if(portalControl.enabled)
+        {
+            portalControl.leftThrowInput = Input.GetKeyDown(KeyCode.Q);
+            portalControl.rightThrowInput = Input.GetKeyDown(KeyCode.E);
+        }
     }
 
     void FixedUpdate()

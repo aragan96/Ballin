@@ -10,6 +10,9 @@ public class ThrowPortal : MonoBehaviour {
     public bool portalGunAttached;
     GameObject portalGun;
 
+    public bool rightThrowInput = false;
+    public bool leftThrowInput = false;
+
 	void Start () {
         portalGun = GameObject.FindWithTag("PortalGun");
 	}
@@ -19,11 +22,11 @@ public class ThrowPortal : MonoBehaviour {
         //if the gun is attached throw a portal
         if (portalGunAttached)
         {
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (leftThrowInput)
             {
                 throwPortal(leftPortal);
             }
-            if (Input.GetKeyDown(KeyCode.E))
+            if (rightThrowInput)
             {
                 throwPortal(rightPortal);
             }
