@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+ * Fires the player in the direction of the camera from the cannon when the player is attached
+ * */
+
 public class Cannon : MonoBehaviour {
 
+    //Get the camera and power bar slider
     public bool playerOnCannon;
     public GameObject player;
     GameObject sliderObject;
     Slider powerBar;
     GameObject mainCamera;
 
-	// Use this for initialization
 	void Start () {
         mainCamera = GameObject.FindWithTag("MainCamera");
         sliderObject = GameObject.Find("PowerBar");
@@ -23,6 +27,8 @@ public class Cannon : MonoBehaviour {
 	void Update () {
         if (playerOnCannon)
         { 
+            
+            //Make a ray from the camera to the center of the screen to get direction of fire
             int x = Screen.width / 2;
             int y = (Screen.height / 2);
             Ray ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(new Vector3(x, y));
@@ -32,6 +38,8 @@ public class Cannon : MonoBehaviour {
                 transform.GetChild(1).transform.LookAt(hit.point);
                 player.transform.GetChild(2).transform.position = transform.GetChild(1).transform.GetChild(2).transform.position;
             }
+
+            //Fire the player along the calculated ray
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");

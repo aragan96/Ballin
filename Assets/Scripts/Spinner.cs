@@ -3,14 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Spinner : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
 	
-	// Update is called once per frame
 	void Update () {
+
+        //Spin the attached object
 		transform.Rotate (0,0,50*Time.deltaTime);
 	}
 }

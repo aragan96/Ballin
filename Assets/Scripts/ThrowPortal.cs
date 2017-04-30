@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Throws a portal from the gun onto a portal wall
+ * 
+ * Basic structure adapted from unitytutorials.com youtube channel portal tutorial:
+ * https://www.youtube.com/watch?v=sK9Qf8ElFHo 
+ * */
+
 public class ThrowPortal : MonoBehaviour {
 
     //the two portals and the gun

@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Allows a platform to move
+ * */
+
 public class MovingPlatform : MonoBehaviour {
 
 

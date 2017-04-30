@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Player dies when comes into contact with an object with this script
+ * */
+
 public class DeathTile : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other){

@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+ * Implements a power bar that is used when the player is attached to a cannon
+ * */
+
 public class CannonPowerBar : MonoBehaviour {
 
     Slider powerBar;
     public int meterSpeed = 1;
-
-	// Use this for initialization
+    
 	void Start () {
         powerBar = GetComponent<Slider>();
 	}
 	
-	// Update is called once per frame
 	void Update () {
+
+        //Adjust the slider 
         if (powerBar.value >= powerBar.maxValue||powerBar.value<=powerBar.minValue)
         {
             meterSpeed = meterSpeed * -1;

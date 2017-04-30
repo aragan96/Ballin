@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Plays audio at the startup of the game, music plays continuously throughout gameplay
+ * */
+
 public class Audio:MonoBehaviour{
 
 	void Awake() {

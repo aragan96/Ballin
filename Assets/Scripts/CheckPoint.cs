@@ -2,26 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Records the position of the player in the case of player death
+ * */
+
 public class CheckPoint : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
+    
 	void OnTriggerEnter(Collider other){
 		if (other.tag == "Player") {
 			other.GetComponentInParent<PlayerController> ().SaveCheckpoint (transform.position);
 			gameObject.GetComponent<Renderer> ().material.color = Color.green;
-
 		}
 	}
-
-	
-
 }
