@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class ThrowPortal : MonoBehaviour {
 
+    //the two portals and the gun
     public GameObject leftPortal;
     public GameObject rightPortal;
     public bool portalGunAttached;
     GameObject portalGun;
 
-	// Use this for initialization
 	void Start () {
         portalGun = GameObject.FindWithTag("PortalGun");
 	}
 	
-	// Update is called once per frame
 	void Update () {
+
+        //if the gun is attached throw a portal
         if (portalGunAttached)
         {
             if (Input.GetKeyDown(KeyCode.Q))
@@ -30,16 +31,24 @@ public class ThrowPortal : MonoBehaviour {
 	}
 
     void throwPortal(GameObject portal){
+
+        //resets the transform in the case the portal was just placed on a moving platform
         portal.transform.parent = null;
+
+        //raycast from the gun to the wall
         RaycastHit hit;
         Vector3 fwd = portalGun.transform.GetChild(1).transform.forward;
         if (Physics.Raycast(portalGun.transform.GetChild(1).transform.position, fwd * 50, out hit) && hit.collider != null)
         {
             if (hit.collider.CompareTag("PortalWall"))
             {
+
+                //rotate the portal so that it is the correct orientation on the wall
                 Quaternion hitObjectRotation = Quaternion.LookRotation(hit.normal);
                 portal.transform.position = hit.point;
                 portal.transform.rotation = hitObjectRotation;
+
+                //move the portal with the moving platform
                 if (hit.transform.gameObject.GetComponent<MovingPlatform>() != null)
                 {
                     portal.transform.parent = hit.transform;
