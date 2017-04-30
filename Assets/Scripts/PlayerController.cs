@@ -49,7 +49,10 @@ public class PlayerController : MonoBehaviour {
         cc = FindObjectOfType<CameraController>();
 		latestCheckpoint = body.transform.position;
 		Physics.gravity = new Vector3 (0, -gravity, 0);
-        portalGun = GameObject.FindGameObjectWithTag("PortalGun").GetComponent<PortalGun>();
+        if (GameObject.FindGameObjectWithTag("PortalGun") != null)
+        {
+            portalGun = GameObject.FindGameObjectWithTag("PortalGun").GetComponent<PortalGun>();
+        }
         Cursor.visible = false;
     }
 
@@ -89,16 +92,16 @@ public class PlayerController : MonoBehaviour {
         if(growInput && (size < maxSize))
         {
             size = Mathf.Min(size + 0.05f, maxSize);
-           if (transform.GetChild(2).GetComponent<ThrowPortal>().portalGunAttached)
+           if (portalGun != null && transform.GetChild(2).GetComponent<ThrowPortal>().portalGunAttached)
             {
                 portalGun.size = Mathf.Min(portalGun.size + 0.025f, maxSize);
             }
         }
 
-        if(shrinkInput && (size > minSize))
+        if (shrinkInput && (size > minSize))
         {
             size = Mathf.Max(size - 0.05f, minSize);
-            if (transform.GetChild(2).GetComponent<ThrowPortal>().portalGunAttached)
+            if (portalGun != null && transform.GetChild(2).GetComponent<ThrowPortal>().portalGunAttached)
             {
                 portalGun.size = Mathf.Max(portalGun.size - 0.025f, minSize);
             }
@@ -106,7 +109,10 @@ public class PlayerController : MonoBehaviour {
 
         cc.scale = size;
         body.transform.localScale = new Vector3(size, size, size);
-        portalGun.gameObject.transform.localScale = new Vector3(portalGun.size, portalGun.size, portalGun.size);
+        if (portalGun != null)
+        {
+            portalGun.gameObject.transform.localScale = new Vector3(portalGun.size, portalGun.size, portalGun.size);
+        }
     }
 
 	// Used for launching platforms
