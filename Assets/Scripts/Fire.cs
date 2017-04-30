@@ -14,7 +14,10 @@ public class Fire : MonoBehaviour {
 
 
 	void OnCollisionEnter(Collision collision){
-		
+		if (other.tag == "Player") {
+			player.GetComponentInParent<PlayerController> ().GoToCheckpoint ();
+			Destroy (player);
+		}
 	}
 	// Update is called once per frame
 	void Update () {
@@ -22,12 +25,7 @@ public class Fire : MonoBehaviour {
 		
 	}
 
-	//when hitting an obstacle (fire) 
-	void OnTriggerEnter(Collider other){
-		if (other.tag == "Player") {
-			other.GetComponentInParent<PlayerController> ().GoToCheckpoint();
-			Destroy(player);
-		}
+
 	}
 
-}
+
